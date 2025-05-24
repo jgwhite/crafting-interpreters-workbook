@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "name": "ch1-java-hello-world",
+      "type": "java",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ch1-java-hello-world",
+      "mainClass": "HelloWorld"
+    }
+  ]
+}
