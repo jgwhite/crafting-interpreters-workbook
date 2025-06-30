@@ -3,3 +3,6 @@ lox/Lox.class: lox/*.java
 
 run: lox/Lox.class
 	java lox.Lox
+
+test: lox/Lox.class
+	java lox.Lox test.lox

@@ -82,6 +82,8 @@ class Scanner {
         if (match('/')) {
           // A comment goes until the end of the line.
           while (peek() != '\n' && !isAtEnd()) advance();
+        } if (match('*')) {
+          comment();
         } else {
           addToken(SLASH);
         }
@@ -157,6 +159,16 @@ class Scanner {
     // Trim the surrounding quotes.
     String value = source.substring(start + 1, current - 1);
     addToken(STRING, value);
+  }
+
+  private void comment() {
+    while (peek() != '*' && peekNext() != '/' && !isAtEnd()) {
+      if (peek() == '\n') line++;
+      advance();
+    }
+    // The closing */
+    advance();
+    advance();
   }
 
   private boolean isDigit(char c) {
