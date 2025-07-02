@@ -10,6 +10,6 @@ test: lox/Lox.class
 tool/GenerateAst.class: tool/GenerateAst.java
 	javac tool/GenerateAst.java
 
-genast: tool/GenerateAst.class
+gen/ast: tool/GenerateAst.class
 	java tool.GenerateAst lox
 

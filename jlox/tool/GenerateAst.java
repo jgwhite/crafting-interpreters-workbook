@@ -34,8 +34,50 @@ public class GenerateAst {
     writer.println("import java.util.List;");
     writer.println();
     writer.println("abstract class " + baseName + " {");
+    writer.println();
 
+        // The AST classes.
+    for (String type : types) {
+      String className = type.split(":")[0].trim();
+      String fields = type.split(":")[1].trim(); 
+      defineType(writer, baseName, className, fields);
+      writer.println();
+    }
+
+    writer.println("}");
     writer.println();
     writer.close();
+  }
+
+  private static void defineType(
+      PrintWriter writer,
+      String baseName,
+      String className,
+      String fieldList
+  ) {
+    String[] fields = fieldList.split(", ");
+
+    writer.println("  static class " + className + " extends " +
+        baseName + " {");
+
+    // Fields.
+    for (String field : fields) {
+      writer.println("    final " + field + ";");
+    }
+    writer.println();
+
+    // Constructor.
+    writer.println("    " + className + "(" + fieldList + ") {");
+
+    // Store parameters in fields.
+    for (String field : fields) {
+      String name = field.split(" ")[1];
+      writer.println("      this." + name + " = " + name + ";");
+    }
+
+    writer.println("    }");
+
+
+    writer.println("  }");
   }
 }
